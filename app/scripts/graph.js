@@ -84,8 +84,8 @@ function initializeGraphVisualizer(data) {
     // Create a clippath for the clipping of the nodes so they will have rounded corners
     svgDefs.append("clipPath")
         .attr("id", "nodeClipPath").append("rect")
-            .attr("width", nodeWidth)
-            .attr("height", nodeHeight)
+        .attr("width", nodeWidth)
+        .attr("height", nodeHeight)
             .attr('y', (nodeHeight/2) * -1)
             .attr('x', (nodeWidth/2) * -1)
             .attr("rx", 3)
