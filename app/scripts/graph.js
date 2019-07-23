@@ -84,12 +84,12 @@ function initializeGraphVisualizer(data) {
     // Create a clippath for the clipping of the nodes so they will have rounded corners
     svgDefs.append("clipPath")
         .attr("id", "nodeClipPath").append("rect")
-        .attr("width", nodeWidth)
-        .attr("height", nodeHeight)
-        .attr('y', (nodeHeight/2) * -1)
-        .attr('x', (nodeWidth/2) * -1)
-        .attr("rx", 3)
-        .attr("ry", 3);
+            .attr("width", nodeWidth)
+            .attr("height", nodeHeight)
+            .attr('y', (nodeHeight/2) * -1)
+            .attr('x', (nodeWidth/2) * -1)
+            .attr("rx", 3)
+            .attr("ry", 3);
 
     // Create the clip path for the node text so they don't interfere with the expand/collapse button
     svgDefs.append("clipPath")
@@ -141,26 +141,26 @@ function initializeGraphVisualizer(data) {
 
     // Set the zoom slider and on input change the zoomListener.
     zoomSlider = d3.select("#zoomSlider")
-      .attr("min", zoomListener.scaleExtent()[0])
-      .attr("max", zoomListener.scaleExtent()[1])
-      .attr("step", (zoomListener.scaleExtent()[1] - zoomListener.scaleExtent()[0])/100)
-      .attr("value", zoomListener.scaleExtent()[1])
-      .on("input", function () {
-          var center = [viewerWidth / 2, viewerHeight / 2],
-          translate = zoomListener.translate(),
-          translate0 = [],
-          l = [],
-          view = {x: translate[0], y: translate[1], k: zoomListener.scale()}
+     .attr("min", zoomListener.scaleExtent()[0])
+     .attr("max", zoomListener.scaleExtent()[1])
+     .attr("step", (zoomListener.scaleExtent()[1] - zoomListener.scaleExtent()[0]) / 100)
+     .attr("value", zoomListener.scaleExtent()[1])
+     .on("input", function() {
+         var center = [viewerWidth / 2, viewerHeight / 2],
+         translate = zoomListener.translate(),
+         translate0 = [],
+         l = [],
+         view = {x: translate[0], y: translate[1], k: zoomListener.scale()}
 
-          translate0 = [(center[0] - view.x) / view.k, (center[1] - view.y) / view.k];
-          view.k = this.value;
-          l = [translate0[0] * view.k + view.x, translate0[1] * view.k + view.y];
+         translate0 = [(center[0] - view.x) / view.k, (center[1] - view.y) / view.k];
+         view.k = this.value;
+         l = [translate0[0] * view.k + view.x, translate0[1] * view.k + view.y];
 
-          view.x += center[0] - l[0];
-          view.y += center[1] - l[1];
+         view.x += center[0] - l[0];
+         view.y += center[1] - l[1];
 
-          zoomListener.scale(this.value).translate([view.x, view.y]).event(svgGroup);
-      });
+         zoomListener.scale(this.value).translate([view.x, view.y]).event(svgGroup);
+     });
 
     // Define the root
     root = treeData;
