@@ -449,6 +449,15 @@ ul.action-menu {
             content: "\E019"
         }
 
+        ul.action-menu li.displayMetric::after {
+            font-family: "Segoe MDL2 Assets";
+            margin-left: 4px;
+            font-size: 10px;
+            top: +2px;
+            position: relative;
+            content: "\E019"
+        }
+
         ul.action-menu li.addNode::before {
             content: var(--main-glyph-add);
         }

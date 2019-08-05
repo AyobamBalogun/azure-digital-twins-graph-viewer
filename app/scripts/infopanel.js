@@ -864,4 +864,28 @@ function ucFirst(string) {
 
     return string.charAt(0).toUpperCase() + string.slice(1);
 
+<<<<<<< HEAD
+=======
 }
+
+function apiLatencyJsonToTable(json, tableName) {
+    if (!json || json.length < 1) return;
+    // Create the basic elements
+    var table = $("<table class='collapsable'></table>");
+    var caption = $(
+        "<caption>" + ucFirst(tableName) + "</caption>"
+    ).on("click", function () {
+        table.toggleClass("collapsed");
+    });
+    table.append(caption);
+    var tableBody = table.append("<tbody></tbody>");
+    for (var i in data.responses[0].content.value[0].timeseries[0].data) {
+        tableBody.append("<tr><td>" +
+            responses[0].content.value[0].timeseries[0].data[i].timeStamp +
+            "</td><td>" + "<tr><td>" +
+            + data.responses[0].content.value[0].timeseries[0].data[0].total + "</td></tr>");
+    }
+    $("#apiLatencyPanelContent> div.info").append(table);
+>>>>>>> parent of 40fafd3... to be revert
+}
+
