@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
 
-// Show the api panel.
+// Show the info panel with the info of the selected node.
 function showApiPanel() {
     // Reset everything.
     $("#apiPanelDrawer").addClass("show");
@@ -12,49 +12,6 @@ function showApiPanel() {
 function hideApiPanel() {
     $("#apiPanel.open").removeClass("open");
     $("#apiPanelDrawer.show").removeClass("show");
-}
-
-// Show the api latency panel.
-function showApiLatencyPanel() {
-    // Reset everything.
-    $("#infoPanel h2")
-        .text("Digital Twin API")
-        .removeClass("api")
-        .addClass("apiLatency");
-    $("#apiLatencyPanelDrawer").addClass("show");
-    $("#apiLatencyPanel").addClass("open"); // Open the panel
-}
-
-// Hide the api Latency panel
-function hideApiLatencyPanel() {
-    $("#apiLatencyPanel.open").removeClass("open");
-    $("#apiLatencyPanelDrawer.show").removeClass("show");
-}
-
-// Show the Function Execution Latency panel.
-function showFunctionExecutionLatencyPanel() {
-    // Reset everything.
-    $("#FunctionExecutionLatencyPanelDrawer").addClass("show");
-    $("#FunctionExecutionLatencyPanel").addClass("open"); // Open the panel
-}
-
-// Hide the Function Execution Latency panel
-function hideFunctionExecutionLatencyPanel() {
-    $("#FunctionExecutionLatencyPanel.open").removeClass("open");
-    $("#FunctionExecutionLatencyDrawer.show").removeClass("show");
-}
-
-// Show the Processing Latency panel.
-function showProcessingLatencyPanel() {
-    // Reset everything.
-    $("#ProcessingLatencyPanelDrawer").addClass("show");
-    $("#ProcessingLatencyPanel").addClass("open"); // Open the panel
-}
-
-// Hide the Processing Latency panel
-function hideProcessingLatencyPanel() {
-    $("#ProcessingLatencyPanel.open").removeClass("open");
-    $("#ProcessingLatencyDrawer.show").removeClass("show");
 }
 
 // Show the info panel with the info of the selected node.
@@ -71,6 +28,7 @@ function showInfoPanel(d) {
         .addClass(d.type);
     $("#infoPanelDrawer.show").removeClass("show");
     $("#infoPanel").addClass("open"); // Open the panel
+
     if (d.type == "space") {
         $("#infoPanel > header > ul.action-menu > li.addNode").show();
         $("#infoPanel > header > ul.action-menu > li.addNode > ul.addNodeSubMenu > li.add").show();
@@ -88,6 +46,7 @@ function showInfoPanel(d) {
         $("#infoPanel > header > ul.action-menu > li.addNode > ul.addNodeSubMenu > li.addMatchers").hide();
         $("#infoPanel > header > ul.action-menu > li.addNode > ul.addNodeSubMenu > li.addDevice").hide();
     }
+
     else {
         $("#infoPanel > header > ul.action-menu > li.addNode > ul.addNodeSubMenu > li.add").hide();
         $("#infoPanel > header > ul.action-menu > li.addNode > ul.addNodeSubMenu > li.addMatchers").hide();
@@ -98,8 +57,13 @@ function showInfoPanel(d) {
         }
         else {
             $("#infoPanel > header > ul.action-menu > li.addNode").hide();
+
         }
+
     }
+
+
+
     // Let's get all the info from the selected element by firing a new API request.
     getDigitalTwinsObject(d.id, d.type, function (data) {
         $("#panelLoaderIcon").hide();
@@ -132,6 +96,7 @@ function showInfoPanel(d) {
         jsonToTable(data, "JSON");
     });
 }
+
 // Hide the info panel
 function hideInfoPanel() {
     $("#infoPanel.open").removeClass("open");
@@ -364,6 +329,7 @@ function showAddObjectForm(parent, type) {
 
     // Let's animate the drawer to show it.
     $("#infoPanelDrawer").addClass("show");
+
     // We need to understand which data for the select menu's for the Types we need to load.
     var selectTypes = []; // Array of all select elements
     var typesToLoad = []; // Array of all the types we need to load.
@@ -404,6 +370,7 @@ function showEditObjectForm(object) {
     form.trigger("reset").show();
     var formContainer = form.find("div.form-container");
     formContainer.empty();
+
     switch (object.type) {
         case "space":
             formContainer.append(
@@ -590,6 +557,7 @@ function showEditObjectForm(object) {
 
     // Let's animate the drawer to show it.
     $("#infoPanelDrawer").addClass("show");
+
     // We need to understand which data for the select menu's for the Types we need to load.
     var selectTypes = []; // Array of all select elements
     var typesToLoad = []; // Array of all the types we need to load.
@@ -634,6 +602,7 @@ function showDeleteObjectForm(object) {
     form.find("h3").text("Delete " + object.label);
     // Let's animate the drawer to show it.
     $("#infoPanelDrawer").addClass("show");
+
     var allChildren = getChildren(object, []);
     if (allChildren.length) {
         var tableBody = form.find("tbody").empty();
@@ -665,6 +634,7 @@ function showDeleteObjectForm(object) {
 // Function that submits the object Form for Add, Edit and Delete.
 function submitObjectForm(form) {
     $("#panelLoaderIcon").show();
+
     var deferred = $.Deferred();
     // Make sure we call the right function based on which form is submitted.
     switch (form.attr("name")) {
@@ -704,15 +674,11 @@ function submitObjectForm(form) {
                 deferred.resolve(s);
             });
             break;
-        case "apiLatencyForm":
-            var json = displayMetrics();
-            apiLatencyJsonToTable(json, "ApiLatencyMetricData");
-            deferred.resolve(s);
-            break;
         default:
             console.log("Unknown Form.");
             break;
     }
+
     // When the call is complete, show the alert message.
     $.when(deferred).done(function (response) {
         if (!response.error) {
@@ -751,6 +717,7 @@ function hideObjectForm() {
 
 // Function that will create the tables from the json.
 function jsonToTable(json, tableName) {
+    
     if (!json || json.length < 1) return;
     // Create the basic elements
     var table = $("<table class='collapsable'></table>");
@@ -857,32 +824,11 @@ function apiJsonToTable(json, tableName) {
     table.append(caption);
     var tableBody = table.append("<tbody></tbody>");
     tableBody.append("<tr><td>" + JSON.stringify(json, null, 2) + "</td></tr>");
+
     $("#apiPanelContent> div.info").append(table);
 }
 
+
 function ucFirst(string) {
-
     return string.charAt(0).toUpperCase() + string.slice(1);
-
 }
-
-function apiLatencyJsonToTable(json, tableName) {
-    if (!json || json.length < 1) return;
-    // Create the basic elements
-    var table = $("<table class='collapsable'></table>");
-    var caption = $(
-        "<caption>" + ucFirst(tableName) + "</caption>"
-    ).on("click", function () {
-        table.toggleClass("collapsed");
-    });
-    table.append(caption);
-    var tableBody = table.append("<tbody></tbody>");
-    for (var i in data.responses[0].content.value[0].timeseries[0].data) {
-        tableBody.append("<tr><td>" +
-            responses[0].content.value[0].timeseries[0].data[i].timeStamp +
-            "</td><td>" + "<tr><td>" +
-            + data.responses[0].content.value[0].timeseries[0].data[0].total + "</td></tr>");
-    }
-    $("#apiLatencyPanelContent> div.info").append(table);
-}
-

@@ -15,7 +15,6 @@
     <script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
     <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.0/js/adal.min.js"></script>
     <script src="https://d3js.org/d3.v3.min.js"></script>
-    <script src="scripts/metrics.js"></script>
     <script src="scripts/storage.js"></script>
     <script src="scripts/login.js"></script>
     <script src="scripts/infopanel.js"></script>
@@ -62,11 +61,6 @@
                     $(this).toggleClass("selected").find("ul").toggle();
                 });
 
-                // Toggle for the drop down Add Node menu
-                $("#displayMetricButton").click(function () {
-                    $(this).toggleClass("selected").find("ul").toggle();
-                });
-
                 // Refresh the data if the refresh button is clicked.
                 $("#refreshButton").click(function () { refreshData(); });
 
@@ -77,21 +71,6 @@
                 $("#apiButton").click(function () { showApiPanel(); });
                 // Hide the API panel when the close button is clicked.
                 $("#apiCloseButton").click(function () { hideApiPanel(); });
-
-                // Open API Latency panel
-                $("#apiLatencyButton").click(function () { showApiLatencyPanel(); });
-                // Hide the API Latency panel when the close button is clicked.
-                $("#apiLatencyCloseButton").click(function () { hideApiLatencyPanel(); });
-
-                // Open Function Execution Latency panel
-                $("#FunctionExecutionLatencyButton").click(function () { showFunctionExecutionLatencyPanel(); });
-                // Hide the Function Execution Latency when the close button is clicked.
-                $("#FunctionExecutionLatencyCloseButton").click(function () { hideFunctionExecutionLatencyPanel(); });
-
-                // Open Processing Latency panel
-                $("#ProcessingLatencyButton").click(function () { showProcessingLatencyPanel(); });
-                // Hide theProcessing Latency when the close button is clicked.
-                $("#ProcessingLatencyCloseButton").click(function () { hideProcessingLatencyPanel(); });
 
                 // Hide the info panel when the close button is clicked.
                 $("#infoCloseButton").click(function () { hideInfoPanel(); });
@@ -241,14 +220,6 @@
                                 <li><span class="matchers">Matchers</span></li>
                             </ul>
                         </li>
-                        <li id="displayMetricButton" class="displayMetric">
-                            Display Metrics
-                            <ul id="displayMetricSubMenuButton" class="displayMetricSubMenu">
-                                <li id='apiLatencyButton'>ApiLatency</li>
-                                <li id='FunctionExecutionLatencyButton'>FunctionExecutionLatency</li>
-                                <li id='ProcessingLatencyButton'>ProcessingLatency</li>
-                            </ul>
-                        </li>
                         <li id="refreshButton" class="refresh">Refresh</li>
                     </ul>
                 </nav>
@@ -295,45 +266,6 @@
                 </section>
             </aside>
 
-            <!-- Api Latency Metrics -->
-            <aside id="apiLatencyPanel" class="drawer">
-                <header>
-                    <h2 class="apiLatency">Api Latency</h2>
-                    <span class="drawer-close" id="apiLatencyCloseButton"></span>
-                </header>
-                <section id="apiLatencyPanelContent" class="drawer-content">
-                    <!-- Drawer for the form. -->
-                    <div id="apiLatencyPanelDrawer" class="drawer-slide-over">
-                        <form name="apiLatencyForm">
-                            <h3>ApiLatencyMetrics</h3>
-                            <div class="form-container">
-                               
-  
-                            </div>
-                        </form>
-                    </div>
-                </section>
-            </aside>
-
-            <!-- Function Execution Latency Metrics -->
-            <aside id="FunctionExecutionLatencyPanel" class="drawer">
-                <header>
-                    <h2 class="FunctionExecutionLatency">Function Execution Latency</h2>
-                    <span class="drawer-close" id="FunctionExecutionLatencyCloseButton"></span>
-                </header>
-            </aside>
-
-            <!-- Processing Latency Metrics -->
-            <aside id="ProcessingLatencyPanel" class="drawer">
-                <header>
-                    <h2 class="ProcessingLatency">Processing Latency</h2>
-                    <span class="drawer-close" id="ProcessingLatencyCloseButton"></span>
-                </header>
-            </aside>
-
-
-
-
             <!-- Info panel that provides more info on the selected node -->
             <aside id="infoPanel" class="drawer">
                 <img src="images/ajax-loader.gif" id="panelLoaderIcon" class="loaderIcon" style="display: none;" />
@@ -351,7 +283,7 @@
                                 <li id='objectAddMatchersButton' class='addMatchers'>Matcher</li>
                             </ul>
                         </li>
-
+                        
                         <li id='objectEditButton' class='edit'>Edit</li>
                         <li id='objectDeleteButton' class='delete'>Delete</li>
                     </ul>
