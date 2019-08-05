@@ -136,5 +136,17 @@ function displayMetrics() {
             }
         ]
     }
-    return data;
+    // Put the data into a variable and format with HTML tags
+    var output = "<table style=\"width:100%\"> <tr> <th>TimeStamp</th> <th>Total</th></tr>"
+    for (var i in data.responses[0].content.value[0].timeseries[0].data) {
+        output += "<tr>";
+        output += "<td>" + data.responses[0].content.value[0].timeseries[0].data[i].timeStamp + "</td>";
+        output += "<td>" + data.responses[0].content.value[0].timeseries[0].data[0].total + "</td>";
+        output += "</tr>";
+    }
+    output += "</table>";
+    // Load the above function when the window loads
+    // Output the data to the "artistlist" element
+    document.getElementById("artistlist").innerHTML = output;
 }
+window.onload = displayMetrics;
