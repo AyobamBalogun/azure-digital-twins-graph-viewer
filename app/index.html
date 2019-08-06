@@ -15,13 +15,15 @@
     <script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
     <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.0/js/adal.min.js"></script>
     <script src="https://d3js.org/d3.v3.min.js"></script>
-    <script src="scripts/metrics.js"></script>
+    <script src="scripts/apiLatency.js"></script>
+    <script src="scripts/functionExecution.js"></script>
+    <script src="scripts/processingLatency.js"></script>
     <script src="scripts/storage.js"></script>
     <script src="scripts/login.js"></script>
     <script src="scripts/infopanel.js"></script>
     <script src="scripts/graph.js"></script>
     <script src="scripts/spaces.js"></script>
-    <script src="scripts/metrics.js"></script>
+
 
     <script type="text/javascript">
 
@@ -306,8 +308,8 @@
                     <!-- Drawer for the form. -->
                     <div id="apiLatencyPanelDrawer" class="drawer-slide-over">
                         <form name="apiLatencyForm">
-                            <h3>ApiLatencyMetrics</h3>
-                            <div id="artistlist"></div>
+                            <h3>ApiLatencyMetrics (Last 5 minutes)</h3>
+                            <div id="apiLatencylist"></div>
                         </form>
                     </div>
                 </section>
@@ -319,6 +321,15 @@
                     <h2 class="FunctionExecutionLatency">Function Execution Latency</h2>
                     <span class="drawer-close" id="FunctionExecutionLatencyCloseButton"></span>
                 </header>
+                    <section id="FunctionExecutionLatencyPanelContent" class="drawer-content">
+                        <!-- Drawer for the form. -->
+                        <div id="FunctionExecutionLatencyPanelDrawer" class="drawer-slide-over">
+                            <form name="FunctionExecutionLatencyForm">
+                                <h3>FunctionExecutionLatencyMetrics (Last 5 minutes)</h3>
+                                <div id="FunctionExecutionLatencylist"></div>
+                            </form>
+                        </div>
+                    </section>
             </aside>
 
             <!-- Processing Latency Metrics -->
@@ -327,6 +338,15 @@
                     <h2 class="ProcessingLatency">Processing Latency</h2>
                     <span class="drawer-close" id="ProcessingLatencyCloseButton"></span>
                 </header>
+                <section id="ProcessingLatencyPanelContent" class="drawer-content">
+                    <!-- Drawer for the form. -->
+                    <div id="ProcessingLatencyPanelDrawer" class="drawer-slide-over">
+                        <form name="ProcessingLatencyForm">
+                            <h3>ProcessingLatencyMetrics (Last 5 minutes)</h3>
+                            <div id="ProcessingLatencylist"></div>
+                        </form>
+                    </div>
+                </section>
             </aside>
 
 

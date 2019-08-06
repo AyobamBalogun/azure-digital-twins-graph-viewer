@@ -704,11 +704,6 @@ function submitObjectForm(form) {
                 deferred.resolve(s);
             });
             break;
-        case "apiLatencyForm":
-            var json = displayMetrics();
-            apiLatencyJsonToTable(json, "ApiLatencyMetricData");
-            deferred.resolve(s);
-            break;
         default:
             console.log("Unknown Form.");
             break;
@@ -863,16 +858,6 @@ function apiJsonToTable(json, tableName) {
 function ucFirst(string) {
 
     return string.charAt(0).toUpperCase() + string.slice(1);
-
-}
-
-function apiLatencyJsonToTable(json, tableName) {
-    var caption = $(
-        "<caption>" + ucFirst(tableName.toString()) + "</caption>"
-    ).on("click", function () {
-        table.toggleClass("collapsed");
-    });
-    $("#apiLatencyPanelContent> div.info").append(table);
 
 }
 
